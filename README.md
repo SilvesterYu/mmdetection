@@ -1,3 +1,18 @@
+Notes for running it on our custom dataset
+
+## Train
+
+```
+python tools/train.py configs/my_custom/mask_rcnn_r50_caffe_fpn_mstrain-poly_1x_my_custom.py --auto-scale-lr
+```
+
+## Test
+
+```
+python tools/test.py configs/my_custom/mask_rcnn_r50_caffe_fpn_mstrain-poly_1x_my_custom.py work_dirs/mask_rcnn_r50_caffe_fpn_mstrain-poly_1x_my_custom/latest.pth --eval bbox segm
+```
+End of notes
+
 <div align="center">
   <img src="resources/mmdet-logo.png" width="600"/>
   <div>&nbsp;</div>
