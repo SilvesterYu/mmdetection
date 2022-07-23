@@ -63,8 +63,9 @@ class LoadImageFromFile:
                                 results['img_info']['filename'])
         else:
             filename = results['img_info']['filename']
-
-        img_bytes = self.file_client.get(filename)
+        # --
+        img_bytes = self.file_client.get("/home/silvey/Documents/GitHub/mmdetection/mmdet/datasets/" + filename)
+        # --
         img = mmcv.imfrombytes(
             img_bytes, flag=self.color_type, channel_order=self.channel_order)
         if self.to_float32:

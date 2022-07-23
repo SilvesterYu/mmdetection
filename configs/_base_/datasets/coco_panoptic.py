@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CocoPanopticDataset'
-data_root = 'data/coco/'
+data_root = 'TrainTestingCOCO/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -40,20 +40,20 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/panoptic_train2017.json',
-        img_prefix=data_root + 'train2017/',
-        seg_prefix=data_root + 'annotations/panoptic_train2017/',
+        ann_file=data_root + 'train/annotations.json',
+        img_prefix=data_root + 'train/JPEGImages/',
+        seg_prefix=data_root + 'train/Visualization/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/panoptic_val2017.json',
-        img_prefix=data_root + 'val2017/',
-        seg_prefix=data_root + 'annotations/panoptic_val2017/',
+        ann_file=data_root + 'val/annotations.json',
+        img_prefix=data_root + 'val/JPEGImages/',
+        seg_prefix=data_root + 'val/Visualization/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/panoptic_val2017.json',
-        img_prefix=data_root + 'val2017/',
-        seg_prefix=data_root + 'annotations/panoptic_val2017/',
+        ann_file=data_root + 'val/annotations.json',
+        img_prefix=data_root + 'val/JPEGImages/',
+        seg_prefix=data_root + 'val/Visualization/',
         pipeline=test_pipeline))
 evaluation = dict(interval=1, metric=['PQ'])

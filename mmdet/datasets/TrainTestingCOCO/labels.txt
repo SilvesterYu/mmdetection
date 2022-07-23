@@ -1,0 +1,7 @@
+__ignore__
+_background_
+brick
+cementitious_debris
+PVC
+rebar
+wires

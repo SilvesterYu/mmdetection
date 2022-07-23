@@ -228,6 +228,11 @@ def main():
             CLASSES=datasets[0].CLASSES)
     # add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
+
+    print("+"*100)
+    print(cfg)
+    print("+"*100)
+
     train_detector(
         model,
         datasets,

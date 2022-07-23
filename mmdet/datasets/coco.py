@@ -18,7 +18,7 @@ from .api_wrappers import COCO, COCOeval
 from .builder import DATASETS
 from .custom import CustomDataset
 
-
+# -- here
 @DATASETS.register_module()
 class CocoDataset(CustomDataset):
 
@@ -383,13 +383,15 @@ class CocoDataset(CustomDataset):
         result_files = self.results2json(results, jsonfile_prefix)
         return result_files, tmp_dir
 
+    # -- here3
+    # classwise default is False
     def evaluate_det_segm(self,
                           results,
                           result_files,
                           coco_gt,
                           metrics,
                           logger=None,
-                          classwise=False,
+                          classwise=True,
                           proposal_nums=(100, 300, 1000),
                           iou_thrs=None,
                           metric_items=None):
@@ -528,6 +530,7 @@ class CocoDataset(CustomDataset):
                         f'{cocoEval.stats[coco_metric_names[item]]:.3f}')
                     eval_results[item] = val
             else:
+                print("++++++++++++++++ went here +++++++++++++")
                 cocoEval.evaluate()
                 cocoEval.accumulate()
 
@@ -538,9 +541,11 @@ class CocoDataset(CustomDataset):
                 print_log('\n' + redirect_string.getvalue(), logger=logger)
 
                 if classwise:  # Compute per-category AP
+                    print("_______________ classwise ___________")
                     # Compute per-category AP
                     # from https://github.com/facebookresearch/detectron2/
                     precisions = cocoEval.eval['precision']
+                    
                     # precision: (iou, recall, cls, area range, max dets)
                     assert len(self.cat_ids) == precisions.shape[2]
 
@@ -589,12 +594,14 @@ class CocoDataset(CustomDataset):
 
         return eval_results
 
+    # -- here
+    # classwise by default false
     def evaluate(self,
                  results,
                  metric='bbox',
                  logger=None,
                  jsonfile_prefix=None,
-                 classwise=False,
+                 classwise=True,
                  proposal_nums=(100, 300, 1000),
                  iou_thrs=None,
                  metric_items=None):
@@ -639,6 +646,7 @@ class CocoDataset(CustomDataset):
         self.cat_ids = coco_gt.get_cat_ids(cat_names=self.CLASSES)
 
         result_files, tmp_dir = self.format_results(results, jsonfile_prefix)
+        # -- here2
         eval_results = self.evaluate_det_segm(results, result_files, coco_gt,
                                               metrics, logger, classwise,
                                               proposal_nums, iou_thrs,

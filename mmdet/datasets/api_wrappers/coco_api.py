@@ -20,7 +20,9 @@ class COCO(_COCO):
             warnings.warn(
                 'mmpycocotools is deprecated. Please install official pycocotools by "pip install pycocotools"',  # noqa: E501
                 UserWarning)
-        super().__init__(annotation_file=annotation_file)
+        # --
+        super().__init__(annotation_file="/home/silvey/Documents/GitHub/mmdetection/mmdet/datasets/"+annotation_file)
+        # --
         self.img_ann_map = self.imgToAnns
         self.cat_img_map = self.catToImgs
 
