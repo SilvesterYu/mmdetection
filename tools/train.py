@@ -213,6 +213,8 @@ def main():
         cfg.model,
         train_cfg=cfg.get('train_cfg'),
         test_cfg=cfg.get('test_cfg'))
+    print("----- model ----------------------------")
+    print(type(model))
     model.init_weights()
 
     datasets = [build_dataset(cfg.data.train)]
@@ -228,10 +230,6 @@ def main():
             CLASSES=datasets[0].CLASSES)
     # add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
-
-    print("+"*100)
-    print(cfg)
-    print("+"*100)
 
     train_detector(
         model,

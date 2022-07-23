@@ -25,4 +25,4 @@ data = dict(
         ann_file='TrainTestingCOCO/val/annotations.json'))
 
 # We can use the pre-trained Mask RCNN model to obtain higher performance
-load_from = 'checkpoints/mask_rcnn_r50_caffe_fpn_mstrain-poly_3x_coco_bbox_mAP-0.408__segm_mAP-0.37_20200504_163245-42aa3d00.pth'
+# load_from = 'checkpoints/mask_rcnn_r50_caffe_fpn_mstrain-poly_3x_coco_bbox_mAP-0.408__segm_mAP-0.37_20200504_163245-42aa3d00.pth'

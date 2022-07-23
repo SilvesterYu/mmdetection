@@ -530,7 +530,6 @@ class CocoDataset(CustomDataset):
                         f'{cocoEval.stats[coco_metric_names[item]]:.3f}')
                     eval_results[item] = val
             else:
-                print("++++++++++++++++ went here +++++++++++++")
                 cocoEval.evaluate()
                 cocoEval.accumulate()
 
@@ -541,7 +540,6 @@ class CocoDataset(CustomDataset):
                 print_log('\n' + redirect_string.getvalue(), logger=logger)
 
                 if classwise:  # Compute per-category AP
-                    print("_______________ classwise ___________")
                     # Compute per-category AP
                     # from https://github.com/facebookresearch/detectron2/
                     precisions = cocoEval.eval['precision']
@@ -550,12 +548,14 @@ class CocoDataset(CustomDataset):
                     assert len(self.cat_ids) == precisions.shape[2]
 
                     results_per_category = []
+
                     for idx, catId in enumerate(self.cat_ids):
                         # area range index 0: all area ranges
                         # max dets index -1: typically 100 per image
                         nm = self.coco.loadCats(catId)[0]
                         precision = precisions[:, :, idx, 0, -1]
                         precision = precision[precision > -1]
+
                         if precision.size:
                             ap = np.mean(precision)
                         else:

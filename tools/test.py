@@ -215,8 +215,6 @@ def main():
 
     # build the dataloader
     dataset = build_dataset(cfg.data.test)
-    print("&"*100)
-    print(type(dataset))
     data_loader = build_dataloader(dataset, **test_loader_cfg)
 
     # build the model and load checkpoint
@@ -235,9 +233,6 @@ def main():
     else:
         model.CLASSES = dataset.CLASSES
 
-    print("+"*100)
-    print(model.CLASSES)
-
     if not distributed:
         model = build_dp(model, cfg.device, device_ids=cfg.gpu_ids)
         outputs = single_gpu_test(model, data_loader, args.show, args.show_dir,
@@ -252,10 +247,6 @@ def main():
             model, data_loader, args.tmpdir, args.gpu_collect
             or cfg.evaluation.get('gpu_collect', False))
     
-    
-    for i in outputs:
-        print("-"*100)
-        print(i)
 
     rank, _ = get_dist_info()
     if rank == 0:
@@ -274,8 +265,6 @@ def main():
             ]:
                 eval_kwargs.pop(key, None)
             eval_kwargs.update(dict(metric=args.eval, **kwargs))
-            print("------------------- eval kwargs -----------")
-            print(eval_kwargs)
             metric = dataset.evaluate(outputs, **eval_kwargs)
             print(metric)
             metric_dict = dict(config=args.config, metric=metric)
